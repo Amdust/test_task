@@ -36,8 +36,8 @@ var expressionSlice []string
 
 func main() {
 	var input string
-	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Println("Калькулятор принимает римские и арабские числа от 1 до 10")
+	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	input = scanner.Text()
 	expression := strings.ReplaceAll(input, " ", "")
@@ -48,8 +48,8 @@ func main() {
 func calculation(expression string) {
 	var operator string
 	var stringCount int
-	arabic_numbers := make([]int, 0)
-	roman_numbers := make([]string, 0)
+	arabicNumbers := make([]int, 0)
+	romanNumbers := make([]string, 0)
 	romansToInt := make([]int, 0)
 	for key := range operators {
 		for _, value := range expression {
@@ -68,10 +68,10 @@ func calculation(expression string) {
 	for _, el := range expressionSlice {
 		number, err := strconv.Atoi(el)
 		if err == nil {
-			arabic_numbers = append(arabic_numbers, number)
+			arabicNumbers = append(arabicNumbers, number)
 		} else {
 			stringCount++
-			roman_numbers = append(roman_numbers, el)
+			romanNumbers = append(romanNumbers, el)
 		}
 	}
 	switch {
@@ -79,9 +79,9 @@ func calculation(expression string) {
 		panic("Арабские и римские цифры смешивать нельзя")
 	case stringCount == 0:
 		// Проверить сколько чисел. Проверить их значение от 1 до 10. Если все ок, то задать значение указателей и завершить
-		if arabic_numbers[0] <= 10 && arabic_numbers[0] > 0 && arabic_numbers[1] > 0 && arabic_numbers[1] <= 10 {
-			a = &arabic_numbers[0]
-			b = &arabic_numbers[1]
+		if arabicNumbers[0] <= 10 && arabicNumbers[0] > 0 && arabicNumbers[1] > 0 && arabicNumbers[1] <= 10 {
+			a = &arabicNumbers[0]
+			b = &arabicNumbers[1]
 			val, _ := operators[operator]
 			fmt.Println(val())
 			fmt.Println(romansToInt)
@@ -90,7 +90,7 @@ func calculation(expression string) {
 		}
 
 	case stringCount == 2:
-		for _, elem := range roman_numbers {
+		for _, elem := range romanNumbers {
 			if val, ok := romanMap[elem]; ok && val >= 1 && val <= 10 {
 				romansToInt = append(romansToInt, val)
 			} else {

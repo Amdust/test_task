@@ -113,13 +113,28 @@ func calculation(expression string) {
 }
 
 func integerToRoman(number int) string {
+	romanConv := []struct {
+		value int
+		digit string
+	}{
+		{100, "C"},
+		{90, "XC"},
+		{50, "L"},
+		{40, "XL"},
+		{10, "X"},
+		{9, "IX"},
+		{5, "V"},
+		{4, "IV"},
+		{1, "I"},
+	}
 
 	var roman strings.Builder
-	for key, value := range romanMap {
-		for number >= value {
-			roman.WriteString(key)
-			number -= value
+	for _, conversion := range romanConv {
+		for number >= conversion.value {
+			roman.WriteString(conversion.digit)
+			number -= conversion.value
 		}
 	}
+
 	return roman.String()
 }

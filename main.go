@@ -80,7 +80,6 @@ func calculation(expression string) {
 			b = &arabicNumbers[1]
 			val, _ := operators[operator]
 			fmt.Println(val())
-			fmt.Println(romansToInt)
 		} else {
 			panic("Введите число от 1 до 10")
 		}
